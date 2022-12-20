@@ -2,8 +2,11 @@ apiPath=apps/api
 webPath=apps/web
 deleteImagesAfter=72h
 
-install: 
+ci: 
 	yarn --frozen-lockfile
+
+i:
+	yarn
 
 dev: 
 	yarn dev
