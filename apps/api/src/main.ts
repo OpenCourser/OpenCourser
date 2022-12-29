@@ -8,4 +8,5 @@ async function bootstrap() {
 
   const seomthing: TestDto = { id: 123, name: 'sadas' };
 }
+
 bootstrap();

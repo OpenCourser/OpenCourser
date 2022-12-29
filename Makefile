@@ -8,11 +8,22 @@ ci:
 i:
 	yarn
 
-dev: 
+dev: kill-ports dev-all
+
+dev-all:
 	yarn dev
 
-build: 
-	yarn build
+lint:
+	yarn eslint ${apiPath}
+	yarn eslint ${webPath}
+
+build: build-api build-web
+
+build-api:
+	cd ${apiPath} && yarn build
+
+build-web:
+	cd ${webPath} && yarn build
 
 prod/build: 
 	docker image prune -a --force --filter "until=${deleteImagesAfter}"
@@ -21,3 +32,6 @@ prod/build:
 
 clean:
 	@find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+
+kill-ports: 
+	npx --yes kill-port 3000 3333

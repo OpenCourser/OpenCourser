@@ -1,0 +1,11 @@
+lib
+.storybook
+build
+dist
+node_modules
+.eslintrc.js
+next.config.js
+
+# tests 
+apps/api/test
+apps/web/test
