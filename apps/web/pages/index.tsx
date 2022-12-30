@@ -2,7 +2,7 @@ import { AccessTokenError, getAccessToken } from '@auth0/nextjs-auth0';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { GetServerSidePropsContext } from 'next';
 
-export default ({ serverText }) => {
+export default function Index({ serverText }) {
   const { user, error, isLoading } = useUser();
 
   if (isLoading) return <div>Loading...</div>;
@@ -16,7 +16,7 @@ export default ({ serverText }) => {
     );
   }
   return <a href="/api/auth/login">{serverText} Login</a>;
-};
+}
 
 export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
   try {
