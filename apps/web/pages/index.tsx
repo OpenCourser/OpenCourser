@@ -43,28 +43,3 @@ export async function getServerSideProps({ req, res }: GetServerSidePropsContext
     }
   }
 }
-
-const TestForm = ({ onSubmit }: { onSubmit: (values: TestDto) => void }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TestDto>({
-    resolver: zodResolver(testValidationSchema),
-  });
-
-  const onSubmitInternal = (data: TestDto) => {
-    console.log(data);
-    onSubmit(data);
-  };
-
-  return (
-    <form style={{ display: 'flex', flexDirection: 'column', maxWidth: '300px' }} onSubmit={handleSubmit(onSubmitInternal)}>
-      <input {...register('id', { valueAsNumber: true })} placeholder="Id" type="number" />
-      {errors && errors.id ? <p style={{ color: 'red' }}>{errors.id.message}</p> : null}
-      <input {...register('name')} placeholder="Name" />
-      {errors && errors.name ? <p style={{ color: 'red' }}>{errors.name.message}</p> : null}
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
