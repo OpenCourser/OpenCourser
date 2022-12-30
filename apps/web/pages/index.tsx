@@ -1,22 +1,47 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { TestDto, testValidationSchema } from '@opencourser/interfaces';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { AccessTokenError, getAccessToken } from '@auth0/nextjs-auth0';
+import { useUser } from '@auth0/nextjs-auth0/client';
+import { GetServerSidePropsContext } from 'next';
 
-export default function Web() {
-  const [formValues, setFormValues] = useState<TestDto>();
+export default ({ serverText }) => {
+  const { user, error, isLoading } = useUser();
 
-  return (
-    <div>
-      <h1>Web</h1>
-      <TestForm
-        onSubmit={(values) => {
-          setFormValues(values);
-        }}
-      />
-      {!!formValues ? <p>{JSON.stringify(formValues)}</p> : null}
-    </div>
-  );
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  if (user) {
+    return (
+      <div>
+        {serverText} Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
+      </div>
+    );
+  }
+  return <a href="/api/auth/login">{serverText} Login</a>;
+};
+
+export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
+  try {
+    const { accessToken } = await getAccessToken(req, res, {
+      scopes: [],
+    });
+
+    const response = await fetch('http://localhost:3333', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return {
+      props: {
+        serverText: await response.text(),
+      },
+    };
+  } catch (e) {
+    if (e instanceof AccessTokenError) {
+      console.error(e);
+      return {
+        props: { serverText: 'No session found' },
+      };
+    }
+  }
 }
 
 const TestForm = ({ onSubmit }: { onSubmit: (values: TestDto) => void }) => {

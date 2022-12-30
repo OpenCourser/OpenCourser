@@ -8,9 +8,7 @@ ci:
 i:
 	yarn
 
-dev: kill-ports dev-all
-
-dev-all:
+dev:
 	yarn dev
 
 lint:
