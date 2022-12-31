@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "TIMING=1 eslint \"**/*.ts*\"",
-    "build-types": "tsc"
+    "build": "tsc"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

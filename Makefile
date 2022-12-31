@@ -17,13 +17,14 @@ lint:
 	yarn eslint ${apiPath}
 	yarn eslint ${webPath}
 
-build: build-api build-web
+build: 
+	yarn build
 
 build-api:
-	cd ${apiPath} && yarn build
+	yarn build -- --filter=@opensourcer/api 
 
 build-web:
-	cd ${webPath} && yarn build
+	yarn build -- --filter=@opensourcer/web
 
 prod/build: 
 	docker image prune -a --force --filter "until=${deleteImagesAfter}"
