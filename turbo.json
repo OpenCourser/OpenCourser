@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
+    "@opencourser/interfaces#build": {},
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
@@ -9,7 +10,8 @@
       "outputs": []
     },
     "dev": {
-      "cache": false
+      "cache": false,
+      "dependsOn": ["@opencourser/interfaces#build"]
     }
   }
 }

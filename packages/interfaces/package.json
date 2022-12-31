@@ -1,11 +1,12 @@
 {
   "name": "@opencourser/interfaces",
   "version": "0.0.0",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "lint": "TIMING=1 eslint \"**/*.ts*\""
+    "lint": "TIMING=1 eslint \"**/*.ts*\"",
+    "build": "tsc"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

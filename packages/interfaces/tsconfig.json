@@ -1,7 +1,10 @@
 {
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
+    "strict": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,7 +15,7 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
