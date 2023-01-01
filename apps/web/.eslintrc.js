@@ -7,33 +7,19 @@ module.exports = {
     project: 'tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  extends: [
-    'next/core-web-vitals',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['next/core-web-vitals', 'plugin:@typescript-eslint/eslint-recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
   root: true,
   env: {
     browser: true,
     node: true,
   },
   rules: {
-    'sort-imports': [
-      'error',
-      { ignoreCase: true, ignoreDeclarationSort: true },
-    ],
+    '@next/next/no-html-link-for-pages': 1,
+    'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true }],
     'import/order': [
       1,
       {
-        groups: [
-          'external',
-          'builtin',
-          'internal',
-          'sibling',
-          'parent',
-          'index',
-        ],
+        groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
         pathGroups: [
           ...getDirectoriesToSort().map((singleDir) => ({
             pattern: `${singleDir}/**`,
@@ -54,9 +40,7 @@ module.exports = {
 };
 
 function getDirectoriesToSort() {
-  return getDirectories(process.cwd()).filter(
-    (f) => !ignoredSortingDirectories.includes(f),
-  );
+  return getDirectories(process.cwd()).filter((f) => !ignoredSortingDirectories.includes(f));
 }
 
 function getDirectories(path) {
