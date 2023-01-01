@@ -1,45 +1,44 @@
-import { AccessTokenError, getAccessToken } from '@auth0/nextjs-auth0';
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { GetServerSidePropsContext } from 'next';
+import { SettingsIcon } from '@chakra-ui/icons';
+import { Box, IconButton, Image, Spacer } from '@chakra-ui/react';
+import { Menu, MenuButton, MenuItem, MenuList } from '@saas-ui/menu';
+import { AppShell } from '@saas-ui/react';
+import { NavItem, Sidebar, SidebarSection, SidebarToggleButton } from '@saas-ui/sidebar';
+import React from 'react';
 
-export default function Index({ serverText }) {
-  const { user, error, isLoading } = useUser();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
-
-  if (user) {
-    return (
-      <div>
-        {serverText} Welcome {user.name}! <a href="/api/auth/logout">Logout</a>
-      </div>
-    );
-  }
-  return <a href="/api/auth/login">{serverText} Login</a>;
-}
-
-export async function getServerSideProps({ req, res }: GetServerSidePropsContext) {
-  try {
-    const { accessToken } = await getAccessToken(req, res, {
-      scopes: [],
-    });
-
-    const response = await fetch('http://localhost:3333', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return {
-      props: {
-        serverText: await response.text(),
-      },
-    };
-  } catch (e) {
-    if (e instanceof AccessTokenError) {
-      console.error(e);
-      return {
-        props: { serverText: 'No session found' },
-      };
-    }
-  }
+export default function Web() {
+  return (
+    <AppShell
+      navbar={
+        <Box as="header" borderBottomWidth="1px" py="2" px="4">
+          {/* <SaasUILogo width="100px" /> */}
+        </Box>
+      }
+      sidebar={
+        <Sidebar minH="100vh">
+          <SidebarToggleButton />
+          <SidebarSection direction="row">
+            <Image src="https://saas-ui.dev/favicons/favicon-96x96.png" boxSize="7" />
+            <Spacer />
+            <Menu>
+              <MenuButton as={IconButton} variant="ghost" />
+              <MenuList>
+                <MenuItem>Sign out</MenuItem>
+              </MenuList>
+            </Menu>
+          </SidebarSection>
+          <SidebarSection aria-label="Main">
+            <NavItem icon={<SettingsIcon />} isActive>
+              Home
+            </NavItem>
+            <NavItem icon={<SettingsIcon />}>Users</NavItem>
+            <NavItem icon={<SettingsIcon />}>Settings</NavItem>
+          </SidebarSection>
+        </Sidebar>
+      }
+    >
+      <Box as="main" minH="100vh" flex="1" py="2" px="4" overflowY="auto">
+        Your application content
+      </Box>
+    </AppShell>
+  );
 }
