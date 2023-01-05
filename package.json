@@ -17,11 +17,12 @@
     "prettier": "latest",
     "turbo": "latest"
   },
+  "dependencies": {
+    "typescript": "^4.7.4",
+    "zod": "^3.20.2"
+  },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "dependencies": {
-    "zod": "^3.20.2"
   },
   "packageManager": "yarn@1.22.19"
 }
