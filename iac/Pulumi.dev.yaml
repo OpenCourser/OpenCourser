@@ -1,0 +1,6 @@
+encryptionsalt: v1:WhW3R2AeuGw=:v1:A81TfbtnUI0wCd1q:gWfRhcl5EDg6DinwNSACx7ncmxXQlw==
+config:
+  cloudflare:accountId: 0c1a0357dffde817ec6f236404837259
+  cloudflare:apiKey:
+    secure: v1:2CcirI553T/41rNL:ov/3p3ci3g023jW1JWMJNdI4He6BjXTWsZyLOBopqZE7lNSuv7j6opfvQ3TYmHb31wkveq8=
+  cloudflare:email: contact@bstefanski.com
