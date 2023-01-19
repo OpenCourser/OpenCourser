@@ -1,8 +1,8 @@
 {
   "name": "@opencourser/interfaces",
   "version": "0.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./index.ts",
+  "types": "./index.d.ts",
   "private": true,
   "license": "MIT",
   "scripts": {
