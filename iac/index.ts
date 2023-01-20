@@ -29,11 +29,13 @@ const basicProject = new cloudflare.PagesProject('opencourser-web', {
   deploymentConfigs: {
     preview: {
       environmentVariables: {
-        ENVIRONMENT: 'preview',
+        NODE_ENV: 'staging',
+        NODE_VERSION: '16.13.0',
       },
     },
     production: {
       environmentVariables: {
+        NODE_ENV: 'production',
         NODE_VERSION: '16.13.0',
       },
     },
