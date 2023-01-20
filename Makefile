@@ -19,10 +19,10 @@ build:
 	yarn build
 
 build-api:
-	yarn build -- --filter=@opensourcer/api 
+	yarn build -- --filter=@opencourser/api 
 
 build-web:
-	yarn build -- --filter=@opensourcer/web
+	yarn build -- --filter=@opencourser/web
 
 prod/build: 
 	docker image prune -a --force --filter "until=${deleteImagesAfter}"

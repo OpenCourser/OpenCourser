@@ -34,8 +34,7 @@ const basicProject = new cloudflare.PagesProject('opencourser-web', {
     },
     production: {
       environmentVariables: {
-        ENVIRONMENT: 'production',
-        OTHERVALUE: 'other value',
+        NODE_VERSION: '16.13.0',
       },
     },
   },
