@@ -3,14 +3,14 @@ import * as cloudflare from '@pulumi/cloudflare';
 
 const cfg = new pulumi.Config();
 
-const basicProject = new cloudflare.PagesProject('openCourserWeb', {
-  accountId: cfg.require('cloudflare:accountId'),
+const basicProject = new cloudflare.PagesProject('opencourser-web', {
+  accountId: cfg.require('cloudflareAccountId'),
   name: 'opencourser-web',
   productionBranch: 'main',
   buildConfig: {
     buildCommand: 'make build-web',
     destinationDir: 'apps/web/.next',
-    rootDir: 'apps/web',
+    rootDir: '',
   },
   source: {
     config: {
