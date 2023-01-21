@@ -9,6 +9,7 @@
 [Prerequisites](#prerequisites)  
 [Tech stack](#tech-stack)  
 [How to run and build the project](#how-to-run-and-build-the-project)    
+[Adding dependencies](#adding-dependencies)  
 [MVP](#mvp-minimum-viable-product)  
 [After-MVP](#after-mvp-features)  
 
@@ -36,6 +37,24 @@ Clone the project, go to the project directory and run this command:
 make ci && make dev
 ```
 To verify that the project is running go to `http://localhost:3000` and `http://localhost:3333` and see if something happens
+
+## Adding dependencies
+
+Always use yarn workspaces to add new dependencies to any package/app.  
+If you want it to be in `devDependencies` use `-D` option after `add` keyword  
+
+```sh
+## adding `someTestDependencyPleaseReplaceWithYours` to a frontend application.
+yarn workspace @opencourser/web add someTestDependencyPleaseReplaceWithYours
+
+## adding `someTestDependencyPleaseReplaceWithYours` to a backend application
+yarn workspace @opencourser/api add someTestDependencyPleaseReplaceWithYours
+```
+
+In cases where you want to install a global dependency for all packages (i.e. new TypeScript version or utility), use this command at the root level:
+```sh
+yarn add -W someTestDependencyPleaseReplaceWithYours
+```
 
 ## MVP (minimum viable product)
 
