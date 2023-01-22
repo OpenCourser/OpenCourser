@@ -4,8 +4,37 @@ import { Menu, MenuButton, MenuItem, MenuList } from '@saas-ui/menu';
 import { AppShell } from '@saas-ui/react';
 import { NavItem, Sidebar, SidebarSection, SidebarToggleButton } from '@saas-ui/sidebar';
 import React from 'react';
+import VideoJS from 'components/Video';
 
 export default function Web() {
+  const playerRef = React.useRef(null);
+
+  const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [
+      {
+        src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+        type: 'application/x-mpegURL',
+      },
+    ],
+  };
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+
+    // You can handle player events here, for example:
+    player.on('waiting', () => {
+      console.log('player is waiting');
+    });
+
+    player.on('dispose', () => {
+      console.log('player will dispose');
+    });
+  };
+
   return (
     <AppShell
       navbar={
@@ -17,7 +46,6 @@ export default function Web() {
         <Sidebar minH="100vh">
           <SidebarToggleButton />
           <SidebarSection direction="row">
-            <Image src="https://saas-ui.dev/favicons/favicon-96x96.png" boxSize="7" />
             <Spacer />
             <Menu>
               <MenuButton as={IconButton} variant="ghost" />
@@ -37,7 +65,7 @@ export default function Web() {
       }
     >
       <Box as="main" minH="100vh" flex="1" py="2" px="4" overflowY="auto">
-        Your application content
+        <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
       </Box>
     </AppShell>
   );
