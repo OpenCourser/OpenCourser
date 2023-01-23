@@ -16,7 +16,7 @@ export default function Web() {
     fluid: true,
     sources: [
       {
-        src: 'https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8',
+        src: './outputfile.m3u8',
         type: 'application/x-mpegURL',
       },
     ],
