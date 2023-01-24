@@ -1,73 +1,85 @@
-# Turborepo starter
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/28964599/213861233-43a76814-7993-46e7-89fe-8dc05cc1f37f.png">
+</p>
 
-This is an official Yarn v1 starter turborepo.
+### Table of contents
 
-## What's inside?
+---
 
-This turborepo uses [Yarn](https://classic.yarnpkg.com/) as a package manager. It includes the following packages/apps:
+[Prerequisites](#prerequisites)  
+[Tech stack](#tech-stack)  
+[How to run and build the project](#how-to-run-and-build-the-project)    
+[Adding dependencies](#adding-dependencies)  
+[MVP](#mvp-minimum-viable-product)  
+[After-MVP](#after-mvp-features)  
 
-### Apps and Packages
+---
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+## Prerequisites
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- Node v16  
+- Yarn  
+- ESLint & Prettier plugins  
+- Make ([Guide for Windows users](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows))  
 
-### Utilities
+## Tech stack
 
-This turborepo has some additional tools already setup for you:
+**Frontend**: `TypeScript`, `React.js v18`, `Next.js v13 (with app directory)`, `ChakraUI`  
+**Backend**: `TypeScript`, `Nest.js`  
+**Infra/Providers**: `AWS`, `Auth0`, `Vercel`  
+**Other**: `Terraform`, `Docker`, `Turborepo`  
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## How to run and build the project
 
-### Build
+Clone the project, go to the project directory and run this command:
 
-To build all apps and packages, run the following command:
-
+```sh
+make ci && make dev
 ```
-cd my-turborepo
-yarn run build
-```
+To verify that the project is running go to `http://localhost:3000` and `http://localhost:3333` and see if something happens
 
-### Develop
+## Adding dependencies
 
-To develop all apps and packages, run the following command:
+Always use yarn workspaces to add new dependencies to any package/app.  
+If you want it to be in `devDependencies` use `-D` option after `add` keyword  
 
-```
-cd my-turborepo
-yarn run dev
-```
+```sh
+## adding `someTestDependencyPleaseReplaceWithYours` to a frontend application.
+yarn workspace @opencourser/web add someTestDependencyPleaseReplaceWithYours
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+## adding `someTestDependencyPleaseReplaceWithYours` to a backend application
+yarn workspace @opencourser/api add someTestDependencyPleaseReplaceWithYours
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
-
-```
-npx turbo link
+In cases where you want to install a global dependency for all packages (i.e. new TypeScript version or utility), use this command at the root level:
+```sh
+yarn add -W someTestDependencyPleaseReplaceWithYours
 ```
 
-## Useful Links
+## MVP (minimum viable product)
 
-Learn more about the power of Turborepo:
+The list of features we expect to have to release MVP: 
+- [ ] Seamless CI/CD pipelines,
+- [ ] IaC based on Vercel, Auth0 & AWS,
+- [ ] Video streaming,
+- [ ] Payments with PayPal/Stripe (paid tickets to access the course),
+- [ ] User accounts for Consumer and Creator
+- [ ] Basic Consumer dashboard
+- [ ] Basic CMS for Creators (as a dashboard)
+  - [ ] Ability to CRUD public and private courses
+  - [ ] Ability to CRUD a video-based, content-based or mixed Topic 
+  - [ ] Ability to CRUD transcriptions for a video
+  - [ ] Basic customer management
+- [ ] Fully integrated Auth0 authn & authz
+- [ ] Perfect a11y & keyboard-only users experience
+- [ ] Green Web Vitals on homepage and public courses pages
+- [ ] Bandwidth optimization - video compression, etc
+- [ ] SEO - rss, og, sitemaps, meaningful HTML tags, etc.
 
-- [Pipelines](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## After-MVP Features
+- [ ] Optional community comments under a Topic
+- [ ] Ability to include Quizes in a Topic (or just another type of Topic)
+- [ ] MDX support in CMS (through sandboxes or plugins ?)
+- [ ] Roadmaps/Paths (similar to pluralsight)
+- [ ] much more...
+
