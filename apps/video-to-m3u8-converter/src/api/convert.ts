@@ -6,11 +6,14 @@ import fs from 'fs';
 import path from 'path';
 import ffmpeg from 'fluent-ffmpeg';
 import ErrorResponse from 'src/interfaces/ErrorResponse';
+import tmp from 'tmp';
 
 const router = express.Router();
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
 ffmpeg.setFfmpegPath(ffmpegPath);
+
+tmp.setGracefulCleanup();
 
 type EmojiResponse = MessageResponse | ErrorResponse | Buffer;
 
@@ -30,38 +33,33 @@ router.post<{}, EmojiResponse>('/', upload.single('video'), async (req, res) => 
   }
 
   try {
-    const inputFileName = path.join(__dirname, `input-video`);
-    const outputFileName = path.join(__dirname, `output.m3u8`);
-
     const requestQueue = new PQueue({ concurrency: 1 });
+    const inputFilenamePrefix = 'input-video';
 
-    await fs.promises.writeFile(inputFileName, videoData);
-    await fs.promises.writeFile(outputFileName, '');
+    const tmpInputFile = tmp.fileSync({ prefix: inputFilenamePrefix });
+    await fs.promises.writeFile(tmpInputFile.name, videoData);
 
     await requestQueue.add(async () => {
-      ffmpeg(inputFileName)
+      ffmpeg(tmpInputFile.name)
         .outputOptions([
           '-codec: copy',
           '-start_number 0',
-          '-hls_time 10',
+          `-hls_time ${process.env.HLS_CHUNK_SIZE}`,
           '-hls_list_size 0',
           '-hls_playlist_type vod',
-          '-hls_base_url http://localhost:3000/',
+          `-hls_base_url ${process.env.HLS_BASE_URL}`,
         ])
         .output('outputfile.m3u8')
-        .on('progress', (info) => {
-          console.log('progress ' + info?.percent + '%');
-        })
         .on('end', async (info) => {
-          await fs.promises.unlink(inputFileName);
-          // await fs.promises.unlink(outputFileName);
-          console.log('done processing input stream');
-          res.end();
+          await fs.promises.unlink(tmpInputFile.name);
+          tmpInputFile.removeCallback();
         })
         .run();
 
       // upload to s3 async (e.g. through api gateway -> sns/sqs -> s3 or something like that, but probably i am over-thinking this )
     });
+
+    res.end();
   } catch (e) {
     if (e instanceof Error) {
       res.status(500).json({
