@@ -9,3 +9,5 @@ next.config.js
 # tests 
 apps/api/test
 apps/web/test
+
+public
