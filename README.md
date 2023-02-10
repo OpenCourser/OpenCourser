@@ -27,7 +27,7 @@
 **Frontend**: `TypeScript`, `React.js v18`, `Next.js v13 (with app directory)`, `ChakraUI`  
 **Backend**: `TypeScript`, `Nest.js`  
 **Infra/Providers**: `AWS`, `Auth0`, `Vercel`  
-**Other**: `Terraform`, `Docker`, `Turborepo`  
+**Other**: `Pulumi`, `Docker`, `Turborepo`  
 
 ## How to run and build the project
 
