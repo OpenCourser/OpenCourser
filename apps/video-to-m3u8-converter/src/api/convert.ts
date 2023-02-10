@@ -6,6 +6,7 @@ import fs from 'fs';
 import ffmpeg from 'fluent-ffmpeg';
 import ErrorResponse from 'src/interfaces/ErrorResponse';
 import tmp from 'tmp';
+import { cget } from '@opencourser/config';
 
 const router = express.Router();
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
@@ -43,10 +44,10 @@ router.post<{}, EmojiResponse>('/', upload.single('video'), async (req, res) => 
         .outputOptions([
           '-codec: copy',
           '-start_number 0',
-          `-hls_time ${process.env.HLS_CHUNK_SIZE}`,
+          `-hls_time ${cget('m3u8ConverterService.hlsChunkSize')}`,
           '-hls_list_size 0',
           '-hls_playlist_type vod',
-          `-hls_base_url ${process.env.HLS_BASE_URL}`,
+          `-hls_base_url ${cget('m3u8ConverterService.hlsBaseUrl')}`,
         ])
         .output('outputfile.m3u8')
         .on('end', async (info) => {
