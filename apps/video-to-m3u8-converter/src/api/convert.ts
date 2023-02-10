@@ -3,7 +3,6 @@ import multer from 'multer';
 import PQueue from 'p-queue';
 import MessageResponse from 'src/interfaces/MessageResponse';
 import fs from 'fs';
-import path from 'path';
 import ffmpeg from 'fluent-ffmpeg';
 import ErrorResponse from 'src/interfaces/ErrorResponse';
 import tmp from 'tmp';

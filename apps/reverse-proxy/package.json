@@ -1,0 +1,14 @@
+{
+  "name": "@opencourser/reverse-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "redbird": "^0.10.0"
+  }
+}
