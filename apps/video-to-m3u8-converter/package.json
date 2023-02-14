@@ -8,7 +8,8 @@
     "dev": "doppler run -- nodemon src/index.ts",
     "build": "doppler run -- tsc",
     "lint": "eslint --fix src test",
-    "test": "doppler run -- jest"
+    "test": "doppler run -- jest",
+    "typecheck": "tsc"
   },
   "license": "MIT",
   "dependencies": {

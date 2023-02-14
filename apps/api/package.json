@@ -16,7 +16,8 @@
     "test:watch": "doppler run -- jest --watch",
     "test:cov": "doppler run -- jest --coverage",
     "test:debug": "doppler run -- node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "doppler run -- jest --config ./test/jest-e2e.json"
+    "test:e2e": "doppler run -- jest --config ./test/jest-e2e.json",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
