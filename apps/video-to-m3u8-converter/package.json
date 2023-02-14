@@ -4,11 +4,12 @@
   "private": true,
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "nodemon src/index.ts",
-    "build": "tsc",
+    "start": "doppler run -- ts-node src/index.ts",
+    "dev": "doppler run -- nodemon src/index.ts",
+    "build": "doppler run -- tsc",
     "lint": "eslint --fix src test",
-    "test": "jest"
+    "test": "doppler run -- jest",
+    "typecheck": "tsc"
   },
   "license": "MIT",
   "dependencies": {

@@ -1,0 +1,3 @@
+setup:
+  project: opencourser-api
+  config: dev

@@ -15,6 +15,9 @@ lint:
 	yarn eslint ${apiPath}
 	yarn eslint ${webPath}
 
+typecheck:
+	yarn typecheck
+
 build: 
 	yarn build
 

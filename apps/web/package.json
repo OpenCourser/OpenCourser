@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "doppler run -- next dev",
+    "build": "doppler run -- next build",
+    "start": "doppler run -- next start",
+    "lint": "next lint",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.0.1",
