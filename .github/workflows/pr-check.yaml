@@ -17,4 +17,4 @@ jobs:
           node-version: ${{ env.node_version }}
       - run: make ci
       - run: make lint -j
-      - run: make tsc -j
+      - run: make typecheck -j
