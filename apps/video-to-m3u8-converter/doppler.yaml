@@ -1,0 +1,3 @@
+setup:
+  project: opencourser-m3u8-converter
+  config: dev
