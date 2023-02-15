@@ -1,6 +1,11 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   experimental: {
-    transpilePackages: ["@opencourser/ui"],
+    appDir: true,
+    transpilePackages: ['@opencourser/ui'],
   },
 };
+
+module.exports = nextConfig;
