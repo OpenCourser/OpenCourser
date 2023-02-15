@@ -1,5 +1,6 @@
 var proxy = require('redbird')({
   port: 80,
+  bunyan: false,
 });
 
 proxy.register('opencourser.com', 'http://localhost:3000');
