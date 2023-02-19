@@ -3,7 +3,6 @@
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { Box, Flex } from '@chakra-ui/react';
 import { SaasProvider } from '@saas-ui/react';
-import { Container } from 'components/Container';
 
 import { theme } from 'styles/theme';
 
@@ -44,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Box>
               {/*  */}
 
-              <Container mt="64px">{children}</Container>
+              {children}
             </Box>
           </SaasProvider>
         </UserProvider>
